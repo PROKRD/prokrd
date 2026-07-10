@@ -1,0 +1,228 @@
+/* دیزاینی پرێمیۆمی ڕەش، سپی، زیوی */
+:root {
+    --bg-main: #030303;
+    --bg-secondary: #0a0a0a;
+    --text-white: #ffffff;
+    --text-silver: #a0a0a0;
+    --pure-white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(255, 255, 255, 0.06);
+    --glow-soft: rgba(255, 255, 255, 0.15);
+    --glow-strong: rgba(255, 255, 255, 0.4);
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* شاشەی بارکردن */
+#premium-loader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000000; z-index: 10000;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.8s ease;
+}
+.loader-wrapper { text-align: center; position: relative; }
+.loader-img {
+    width: 160px;
+    animation: rotate3DInfinite 5s linear infinite;
+    filter: drop-shadow(0 0 40px var(--glow-strong));
+}
+.loader-glow-white {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 200px; height: 200px; background: white;
+    filter: blur(80px); opacity: 0.2; animation: pulse 2s infinite alternate;
+}
+.loader-bar-container {
+    width: 250px; height: 2px; background: rgba(255,255,255,0.1);
+    margin: 30px auto 10px; overflow: hidden;
+}
+.loader-bar {
+    width: 0%; height: 100%; background: #ffffff;
+    box-shadow: 0 0 15px #ffffff; animation: fillBar 2s forwards ease-in-out;
+}
+.loader-status { font-size: 0.85rem; color: var(--text-silver); letter-spacing: 2px; }
+
+/* باکگراوند و ڕووناکی */
+#interactiveParticles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -3; pointer-events: none;
+}
+.ambient-glow {
+    position: fixed; border-radius: 50%; filter: blur(150px);
+    background: #ffffff; opacity: 0.05; z-index: -2; pointer-events: none;
+}
+.glow-top { top: -20%; left: 20%; width: 600px; height: 600px; }
+.glow-bottom { bottom: -20%; right: 10%; width: 500px; height: 500px; }
+
+/* ستایلی گشتی Glassmorphism */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+}
+
+/* هێدەر */
+.main-header {
+    position: fixed; top: 20px; left: 5%; right: 5%; height: 75px;
+    z-index: 999; padding: 0 30px; border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.header-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+.brand-logo { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+.header-logo-img { width: 40px; filter: drop-shadow(0 0 15px var(--glow-strong)); }
+.brand-name { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; color: #fff; }
+.nav-menu { display: flex; gap: 35px; }
+.nav-link { color: var(--text-silver); text-decoration: none; font-weight: 500; transition: 0.3s; }
+.nav-link:hover, .nav-link.active { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
+
+/* دوگمەکان */
+.action-btn-outline {
+    padding: 10px 25px; color: #fff; text-decoration: none; border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; font-size: 0.9rem;
+}
+.action-btn-outline:hover { background: #ffffff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+
+.btn-solid-white {
+    display: inline-block; padding: 18px 45px;
+    background: #ffffff; color: #000000; text-decoration: none;
+    border-radius: 50px; font-weight: bold; font-size: 1.2rem;
+    box-shadow: 0 10px 30px rgba(255,255,255,0.2); transition: 0.4s; position: relative;
+}
+.btn-solid-white:hover {
+    transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,255,255,0.4);
+}
+.btn-sub { display: block; font-size: 0.8rem; font-weight: normal; margin-top: 5px; color: #555; }
+
+/* هێرۆ - بەشی سەرەکی */
+.hero-section { min-height: 100vh; display: flex; align-items: center; padding: 150px 8% 100px; }
+.hero-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; width: 100%; align-items: center; }
+.announcement-badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 8px 25px;
+    border-radius: 30px; font-size: 0.9rem; margin-bottom: 30px; border-color: rgba(255,255,255,0.15);
+}
+.badge-dot { width: 8px; height: 8px; background: #ffffff; border-radius: 50%; box-shadow: 0 0 10px #fff; animation: pulse 1s infinite alternate; }
+
+.main-title { font-size: 4.5rem; line-height: 1.1; font-weight: 900; margin-bottom: 25px; }
+.gradient-text-silver {
+    background: linear-gradient(90deg, #ffffff, #888888, #ffffff);
+    background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s linear infinite;
+}
+.main-subtitle { font-size: 1.25rem; color: var(--text-silver); margin-bottom: 40px; max-width: 600px; }
+
+/* لۆگۆی زەبەلاحی 3D */
+.hero-visual-block { display: flex; justify-content: center; position: relative; }
+.giant-logo-container { position: relative; width: 500px; height: 500px; display: flex; justify-content: center; align-items: center; }
+.giant-logo-3d {
+    width: 100%; max-width: 450px; z-index: 2;
+    animation: float3D 6s ease-in-out infinite alternate;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+}
+.logo-glow-effect-massive {
+    position: absolute; width: 80%; height: 80%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    z-index: 1; filter: blur(40px); animation: pulseGlow 4s infinite alternate;
+}
+
+/* تایبەتمەندییەکان */
+.features-section { padding: 100px 8%; }
+.container { max-width: 1400px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 70px; }
+.section-title { font-size: 3rem; font-weight: bold; margin-bottom: 15px; }
+.section-subtitle { color: var(--text-silver); font-size: 1.2rem; }
+
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.feature-card-premium { padding: 50px 40px; transition: 0.4s; text-align: center; }
+.feature-card-premium:hover { transform: translateY(-15px); background: var(--glass-hover); border-color: rgba(255,255,255,0.3); box-shadow: 0 20px 50px rgba(255,255,255,0.05); }
+.card-icon-wrapper { font-size: 3rem; margin-bottom: 25px; display: inline-block; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
+.feature-card-premium h3 { font-size: 1.6rem; margin-bottom: 15px; }
+
+/* مۆکەپی گەڕۆک */
+.showcase-section { padding: 80px 8%; }
+.browser-mockup-3d { border: 1px solid rgba(255,255,255,0.1); overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+.browser-top-bar { background: rgba(20,20,20,0.8); height: 50px; display: flex; align-items: center; padding: 0 20px; gap: 30px; }
+.browser-dots { display: flex; gap: 8px; }
+.gray-dot { width: 12px; height: 12px; border-radius: 50%; background: #444; transition: 0.3s; }
+.browser-mockup-3d:hover .gray-dot:nth-child(1) { background: #ff5f56; }
+.browser-mockup-3d:hover .gray-dot:nth-child(2) { background: #ffbd2e; }
+.browser-mockup-3d:hover .gray-dot:nth-child(3) { background: #27c93f; }
+.browser-tabs { display: flex; height: 100%; align-items: flex-end; gap: 5px; }
+.tab { padding: 8px 25px; font-size: 0.9rem; border-radius: 12px 12px 0 0 !important; border-bottom: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); }
+.tab.active { background: rgba(255,255,255,0.1); }
+.tab-icon { width: 18px; }
+.browser-address-bar { background: #111; padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.address-input { padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; color: #fff; width: 100%; text-align: left; font-family: monospace; }
+.browser-content-area { height: 500px; background: #050505; display: flex; justify-content: center; align-items: center; position: relative; }
+.mockup-center-logo { width: 150px; animation: float3D 4s infinite alternate; filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); }
+.massive-glow { position: absolute; width: 300px; height: 300px; background: rgba(255,255,255,0.05); filter: blur(60px); border-radius: 50%; }
+
+/* بەشی دەربارە (About PROKRD) */
+.about-section { padding: 100px 8%; background: linear-gradient(to bottom, #000, #0a0a0a); }
+.about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.about-card { padding: 40px; text-align: center; position: relative; }
+.about-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+.about-card p { color: var(--text-silver); font-size: 1rem; line-height: 1.8; }
+.about-icon { font-size: 3rem; margin-bottom: 20px; filter: grayscale(100%); }
+.premium-card { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); box-shadow: 0 0 30px rgba(255,255,255,0.05); transform: scale(1.05); z-index: 2; }
+.creator-logo-float { width: 80px; height: 80px; margin-bottom: 20px; animation: rotate3DInfinite 8s linear infinite; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4)); }
+.creator-name { font-size: 1.8rem; margin-bottom: 15px; font-family: 'Segoe UI', sans-serif; }
+
+/* ئامارەکان */
+.stats-section { padding: 50px 8%; }
+.stats-grid { display: flex; justify-content: space-around; padding: 60px; text-align: center; }
+.counter { font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.3); margin-bottom: 10px; }
+.stat-box h5 { color: var(--text-silver); font-size: 1.2rem; }
+
+/* داگرتن */
+.final-download-section { padding: 120px 8%; }
+.download-container { max-width: 800px; margin: 0 auto; padding: 80px 40px; text-align: center; position: relative; overflow: hidden; }
+.glow-bg-inside-white { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); }
+.download-logo-3d { width: 120px; margin-bottom: 30px; animation: float3D 3s infinite alternate; }
+.download-container h2 { font-size: 2.5rem; margin-bottom: 15px; }
+.download-container p { color: var(--text-silver); margin-bottom: 40px; font-size: 1.2rem; }
+.giant-download { font-size: 1.4rem; padding: 20px 60px; }
+
+/* فووتەر - زانیارییە داواکراوەکان */
+.main-footer { padding: 80px 8% 30px; border-top: 1px solid rgba(255,255,255,0.1); background: #000; text-align: center; }
+.footer-logo { width: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+.footer-brand-name { font-size: 2rem; font-weight: bold; }
+.footer-tagline { color: var(--text-silver); margin-bottom: 40px; }
+
+.creator-credits { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
+.credit-badge { padding: 12px 25px; font-size: 1.1rem; border-radius: 30px; background: rgba(255,255,255,0.05); }
+.brand-highlight { border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); font-weight: bold; letter-spacing: 2px; }
+
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; color: #666; font-size: 0.9rem; }
+
+/* ئەنیمەیشنەکان */
+@keyframes rotate3DInfinite { 0% { transform: rotateY(0deg) rotateX(0deg); } 100% { transform: rotateY(360deg) rotateX(360deg); } }
+@keyframes float3D { 0% { transform: translateY(0) rotateX(5deg) rotateY(-5deg); } 100% { transform: translateY(-20px) rotateX(-5deg) rotateY(5deg); } }
+@keyframes pulse { 0% { opacity: 0.3; } 100% { opacity: 0.8; } }
+@keyframes pulseGlow { 0% { transform: scale(0.9); opacity: 0.5; } 100% { transform: scale(1.1); opacity: 1; } }
+@keyframes fillBar { 100% { width: 100%; } }
+@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* گونجاندن بۆ شاشەی بچووک (Responsive) */
+@media (max-width: 968px) {
+    .hero-wrapper, .features-grid, .about-grid { grid-template-columns: 1fr; text-align: center; }
+    .nav-menu { display: none; }
+    .main-title { font-size: 3rem; }
+    .giant-logo-container { width: 300px; height: 300px; margin: 0 auto; }
+    .stats-grid { flex-direction: column; gap: 40px; }
+    .creator-credits { flex-direction: column; align-items: center; }
+}
+
+/* ئەنیمەیشنی دەرکەوتن لەکاتی سکڕۆڵ (Scroll Reveal) */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
